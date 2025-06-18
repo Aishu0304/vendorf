@@ -1,86 +1,118 @@
 <div class="dashboard-wrapper">
-  <!-- Main Dashboard Content -->
+  <!-- Welcome Header -->
   <div class="welcome-header">
-    <h1>Welcome to <span class="sap-highlight">SAP</span> Customer Portal</h1>
+    <h1>Welcome to <span class="sap-highlight">SAP</span> Vendor Portal</h1>
     <p class="welcome-subtitle">Your business insights at a glance</p>
   </div>
 
-  <div class="stats-overview">
-    <div class="stat-card">
-      <div class="stat-icon">
-        <span class="material-icons">trending_up</span>
-      </div>
-      <div class="stat-content">
-        <h3>Sales Performance</h3>
-        <div class="stat-value">€124,500</div>
-        <div class="stat-change positive">
-          <span class="material-icons">arrow_upward</span>
-          <span>12.5% from last month</span>
+  <!-- KPI Cards Section -->
+  <div class="kpi-section">
+    <h2 class="section-title">Key Performance Indicators</h2>
+    <div class="kpi-grid">
+      <div class="kpi-card primary">
+        <div class="kpi-icon">
+          <span class="material-icons">trending_up</span>
+        </div>
+        <div class="kpi-content">
+          <h3>Total Orders</h3>
+          <div class="kpi-value">{{ kpis.totalOrders }}</div>
+          <div class="kpi-change positive">
+            <span class="material-icons">arrow_upward</span>
+            <span>{{ kpis.orderGrowth }}% this month</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="stat-card">
-      <div class="stat-icon">
-        <span class="material-icons">inventory</span>
-      </div>
-      <div class="stat-content">
-        <h3>Open Orders</h3>
-        <div class="stat-value">8</div>
-        <div class="stat-change neutral">
-          <span class="material-icons">remove</span>
-          <span>Same as last week</span>
+      <div class="kpi-card success">
+        <div class="kpi-icon">
+          <span class="material-icons">local_shipping</span>
+        </div>
+        <div class="kpi-content">
+          <h3>Deliveries</h3>
+          <div class="kpi-value">{{ kpis.totalDeliveries }}</div>
+          <div class="kpi-change positive">
+            <span class="material-icons">check_circle</span>
+            <span>{{ kpis.onTimeDeliveryRate }}% on time</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="stat-card">
-      <div class="stat-icon">
-        <span class="material-icons">local_shipping</span>
+      <div class="kpi-card warning">
+        <div class="kpi-icon">
+          <span class="material-icons">pending_actions</span>
+        </div>
+        <div class="kpi-content">
+          <h3>Pending Invoices</h3>
+          <div class="kpi-value">{{ kpis.pendingInvoices }}</div>
+          <div class="kpi-change neutral">
+            <span class="material-icons">schedule</span>
+            <span>{{ kpis.avgPaymentDays }} days avg</span>
+          </div>
+        </div>
       </div>
-      <div class="stat-content">
-        <h3>Pending Deliveries</h3>
-        <div class="stat-value">3</div>
-        <div class="stat-change positive">
-          <span class="material-icons">arrow_downward</span>
-          <span>2 less than last week</span>
+
+      <div class="kpi-card info">
+        <div class="kpi-icon">
+          <span class="material-icons">search</span>
+        </div>
+        <div class="kpi-content">
+          <h3>Active RFQs</h3>
+          <div class="kpi-value">{{ kpis.activeRFQs }}</div>
+          <div class="kpi-change positive">
+            <span class="material-icons">add_circle</span>
+            <span>{{ kpis.newRFQs }} new this week</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Quick Actions Section -->
   <div class="quick-actions">
-    <h2>Quick Actions</h2>
+    <h2 class="section-title">Quick Actions</h2>
     <div class="action-cards">
-      <div class="action-card" [routerLink]="['inquiry']">
-        <span class="material-icons">search</span>
-        <h3>View Inquiries</h3>
-        <p>Check your recent product inquiries</p>
+      <div class="action-card" [routerLink]="['dashboard/inquiry']">
+        <div class="action-icon">
+          <span class="material-icons">search</span>
+        </div>
+        <h3>View RFQs</h3>
+        <p>Check your recent quotation requests</p>
+        <div class="action-badge">{{ kpis.activeRFQs }} Active</div>
       </div>
       
-      <div class="action-card" [routerLink]="['sales-order']">
-        <span class="material-icons">receipt</span>
-        <h3>Sales Orders</h3>
-        <p>Review your current sales orders</p>
+      <div class="action-card" [routerLink]="['dashboard/sales-order']">
+        <div class="action-icon">
+          <span class="material-icons">receipt</span>
+        </div>
+        <h3>Purchase Orders</h3>
+        <p>Review your current purchase orders</p>
+        <div class="action-badge">{{ kpis.totalOrders }} Total</div>
       </div>
       
       <div class="action-card" [routerLink]="['../financial/invoice']">
-        <span class="material-icons">description</span>
+        <div class="action-icon">
+          <span class="material-icons">description</span>
+        </div>
         <h3>Invoices</h3>
         <p>Access your latest invoices</p>
+        <div class="action-badge">{{ kpis.pendingInvoices }} Pending</div>
       </div>
       
       <div class="action-card" [routerLink]="['../financial/aging']">
-        <span class="material-icons">payments</span>
+        <div class="action-icon">
+          <span class="material-icons">payments</span>
+        </div>
         <h3>Payments</h3>
-        <p>Check payment status and history</p>
+        <p>Check payment status and aging</p>
+        <div class="action-badge">{{ kpis.overduePayments }} Overdue</div>
       </div>
     </div>
   </div>
 
+  <!-- Recent Activity Section -->
   <div class="recent-activity">
     <div class="activity-header">
-      <h2>Recent Activity</h2>
+      <h2 class="section-title">Recent Activity</h2>
       <a [routerLink]="['activity']" class="view-all">View All</a>
     </div>
     
@@ -90,7 +122,7 @@
           <span class="material-icons">check_circle</span>
         </div>
         <div class="activity-content">
-          <h4>Order #SAP-78542 Delivered</h4>
+          <h4>Order #PO-78542 Delivered</h4>
           <p>Your order has been successfully delivered</p>
           <span class="activity-time">Today, 10:23 AM</span>
         </div>
@@ -101,14 +133,26 @@
           <span class="material-icons">local_shipping</span>
         </div>
         <div class="activity-content">
-          <h4>Order #SAP-78546 Shipped</h4>
+          <h4>Order #PO-78546 Shipped</h4>
           <p>Your order has been shipped and is on its way</p>
           <span class="activity-time">Yesterday, 2:45 PM</span>
+        </div>
+      </div>
+
+      <div class="activity-item">
+        <div class="activity-icon invoice">
+          <span class="material-icons">description</span>
+        </div>
+        <div class="activity-content">
+          <h4>Invoice #INV-2024-001 Generated</h4>
+          <p>New invoice available for download</p>
+          <span class="activity-time">2 days ago, 3:15 PM</span>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Decorative Elements -->
   <div class="decorative-circle circle-1"></div>
   <div class="decorative-circle circle-2"></div>
   <div class="decorative-circle circle-3"></div>
